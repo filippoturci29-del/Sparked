@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contattaci - Sparked</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* --- STILI SPECIFICI PER PAGINA CONTACT --- */
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 50px;
+            padding: 140px 10% 50px; /* Spazio per l'header */
+            min-height: 100vh;
+            flex-wrap: wrap;
+        }
+
+        /* Colonna Sinistra: Info */
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            animation: slideLeft 1s ease;
+        }
+
+        .contact-info h1 {
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .contact-info h1 span { color: #00d2ff; }
+        
+        .contact-info p {
+            color: #ccc;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .info-box:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.1);
+            border-color: #00d2ff;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: #00d2ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: #162938;
+        }
+
+        .info-text h3 { color: #fff; font-size: 1.1em; margin-bottom: 5px; }
+        .info-text p { color: #aaa; margin: 0; font-size: 0.9em; }
+
+        /* Colonna Destra: Form */
+        .contact-form-wrapper {
+            flex: 1.2;
+            min-width: 350px;
+            background: rgba(20, 30, 50, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            animation: slideRight 1s ease;
+        }
+
+        .contact-form-wrapper h2 {
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px;
+            color: #fff;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1em;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-group select { cursor: pointer; color: #fff; }
+        .form-group select option { background: #162938; }
+
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #00d2ff;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .form-group label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #1d2e40; /* Colore simile allo sfondo per coprire la riga */
+            padding: 0 5px;
+            color: #00d2ff;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .btn-send {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00d2ff, #0077ff);
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-send:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Animazioni */
+        @keyframes slideLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-section { flex-direction: column; padding-top: 100px; gap: 30px; }
+            .contact-info, .contact-form-wrapper { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo Sparked">
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Esplora</a>
+            <a href="contact.html" class="active" style="color: #00d2ff; font-weight: 600;">Contact</a>
+            
+            <a href="index.html" class="btnLogin-popup">Login</a>
+        </nav>
+    </header>
+
+    <div class="contact-section">
+        
+        <div class="contact-info">
+            <h1>Parla con il <br><span>Team Sparked</span></h1>
+            <p>Hai domande, segnalazioni o vuoi semplicemente salutarci? Siamo qui per ascoltarti.</p>
+
+            <div class="info-box">
+                <div class="info-icon"><ion-icon name="mail-unread-outline"></ion-icon></div>
+                <div class="info-text">
+                    <h3>Supporto Generale</h3>
+                    <p>support@sparked.app</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-icon" style="background: #ff0055; color: #fff;"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
+                <div class="info-text">
+                    <h3>Sicurezza & Privacy</h3>
+                    <p>safety@sparked.app</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-icon" style="background: #4cc767; color: #fff;"><ion-icon name="briefcase-outline"></ion-icon></div>
+                <div class="info-text">
+                    <h3>Collaborazioni</h3>
+                    <p>partners@sparked.app</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+            <h2>Inviaci un messaggio</h2>
+            <form onsubmit="inviaMessaggio(event)">
+                
+                <div class="form-group">
+                    <label>Il tuo Nome</label>
+                    <input type="text" id="contact-name" required placeholder="Mario Rossi">
+                </div>
+
+                <div class="form-group">
+                    <label>La tua Email</label>
+                    <input type="email" id="contact-email" required placeholder="mario@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Motivo del contatto</label>
+                    <select id="contact-reason">
+                        <option value="support">Richiesta Supporto</option>
+                        <option value="bug">Segnalazione Errore/Bug</option>
+                        <option value="safety">Segnalazione Utente (Sicurezza)</option>
+                        <option value="collab">Collaborazione Commerciale</option>
+                        <option value="other">Altro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Messaggio</label>
+                    <textarea id="contact-msg" rows="5" required placeholder="Scrivi qui il tuo messaggio..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-send">Invia Messaggio</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        function inviaMessaggio(e) {
+            e.preventDefault(); // Ferma il ricaricamento della pagina
+            
+            // Simula l'invio
+            const nome = document.getElementById('contact-name').value;
+            const btn = document.querySelector('.btn-send');
+            
+            // Effetto visivo sul bottone
+            const originalText = btn.innerText;
+            btn.innerText = "Invio in corso...";
+            btn.style.opacity = "0.7";
+
+            setTimeout(() => {
+                // Usa la funzione showToast che abbiamo creato in script.js
+                if(typeof showToast === "function") {
+                    showToast(`Grazie ${nome}, messaggio inviato! Risponderemo presto.`);
+                } else {
+                    alert("Messaggio inviato con successo!");
+                }
+
+                // Resetta il form e il bottone
+                document.getElementById('contact-name').value = "";
+                document.getElementById('contact-email').value = "";
+                document.getElementById('contact-msg').value = "";
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+            }, 1500); // Ritardo finto di 1.5 secondi
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Il tuo Profilo - Sparked</title>
+      <link rel="stylesheet" href="style.css">
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <style>
+         /* --- STILI SPECIFICI PER IL PROFILO --- */
+         .dashboard-container {
+         padding: 120px 20px 50px;
+         max-width: 900px;
+         margin: 0 auto;
+         color: white;
+         display: flex;
+         flex-direction: column;
+         gap: 30px;
+         }
+         .glass-panel {
+         background: rgba(255, 255, 255, 0.1);
+         backdrop-filter: blur(15px);
+         padding: 40px;
+         border-radius: 20px;
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+         }
+         /* Sezione Foto Profilo */
+         .profile-card {
+         text-align: center;
+         }
+         .profile-pic-container { 
+         width: 160px; 
+         height: 160px; 
+         margin: 20px auto; 
+         position: relative; 
+         }
+         .profile-pic-container img { 
+         width: 100%; 
+         height: 100%; 
+         border-radius: 50%; 
+         object-fit: cover; 
+         border: 4px solid #00d2ff;
+         box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+         transition: 0.3s;
+         }
+         /* Bottone Fotocamera */
+         .upload-btn {
+         position: absolute; 
+         bottom: 5px; 
+         right: 5px;
+         background: #ff0055; 
+         width: 45px; 
+         height: 45px; 
+         border-radius: 50%;
+         display: flex; 
+         align-items: center; 
+         justify-content: center; 
+         cursor: pointer;
+         font-size: 1.4em; 
+         color: white;
+         border: 2px solid rgba(255,255,255,0.5);
+         transition: transform 0.3s ease;
+         }
+         .upload-btn:hover {
+         transform: scale(1.1);
+         background: #ff3377;
+         }
+         /* Testi Profilo */
+         h2 { margin-bottom: 20px; color: #fff; }
+         h3 { font-size: 2em; margin-bottom: 5px; }
+         .location-text { color: #ccc; margin-bottom: 20px; font-style: italic; }
+         /* Area Bio */
+         .bio-section {
+         text-align: left;
+         margin-top: 30px;
+         border-top: 1px solid rgba(255,255,255,0.1);
+         padding-top: 20px;
+         }
+         .bio-section label {
+         display: block;
+         margin-bottom: 10px;
+         font-weight: bold;
+         color: #00d2ff;
+         }
+         textarea { 
+         width: 100%; 
+         background: rgba(0, 0, 0, 0.3); 
+         border: 1px solid rgba(255,255,255,0.2); 
+         color: white; 
+         padding: 15px; 
+         border-radius: 10px; 
+         margin-bottom: 15px;
+         resize: vertical;
+         min-height: 100px;
+         font-family: inherit;
+         }
+         .btn-save {
+         background: #00d2ff;
+         border: none;
+         padding: 10px 25px;
+         border-radius: 5px;
+         color: #162938;
+         font-weight: bold;
+         cursor: pointer;
+         transition: 0.3s;
+         }
+         .btn-save:hover { background: #33e0ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); }
+         /* Griglia dei Like (Preferiti) */
+         .matches-grid {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+         gap: 20px;
+         margin-top: 20px;
+         }
+         .match-card {
+         background: rgba(0, 0, 0, 0.3);
+         border-radius: 15px;
+         padding: 15px;
+         text-align: center;
+         border: 1px solid rgba(255,255,255,0.1);
+         transition: transform 0.3s;
+         }
+         .match-card:hover { transform: translateY(-5px); background: rgba(0,0,0,0.5); }
+         .match-img { 
+         width: 90px; 
+         height: 90px; 
+         border-radius: 50%; 
+         object-fit: cover; 
+         margin-bottom: 10px;
+         border: 2px solid #ff0055;
+         }
+         .match-info h4 { margin: 5px 0 10px; font-size: 1.1em; }
+         .btn-chat {
+         background: transparent;
+         border: 1px solid #00d2ff;
+         color: #00d2ff;
+         padding: 5px 15px;
+         border-radius: 20px;
+         cursor: pointer;
+         font-size: 0.9em;
+         transition: 0.3s;
+         }
+         .btn-chat:hover { background: #00d2ff; color: #162938; }
+      </style>
+   </head>
+   <body>
+      <header>
+         <a href="index.html" class="logo-link">
+         <img src="logo.png" alt="Logo Sparked">
+         </a>
+         <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="services.html">Esplora</a>
+            <button class="btnLogin-popup" onclick="logout()">Logout</button>
+         </nav>
+      </header>
+      <div class="dashboard-container">
+         <div class="profile-card glass-panel">
+            <h2>Il Mio Profilo</h2>
+            <div class="profile-pic-container">
+               <img src="https://via.placeholder.com/150" id="profile-image" alt="Foto Profilo">
+               <label for="upload-photo" class="upload-btn">
+                  <ion-icon name="camera"></ion-icon>
+               </label>
+               <input type="file" id="upload-photo" accept="image/*" style="display: none;">
+            </div>
+            <h3 id="display-name">Caricamento...</h3>
+            <p id="display-location" class="location-text">Posizione non rilevata</p>
+            <div class="bio-section">
+               <label>La tua Bio:</label>
+               <textarea id="user-bio" placeholder="Scrivi qualcosa su di te..."></textarea>
+               <button class="btn-save" onclick="saveBio()">Salva Modifiche</button>
+            </div>
+         </div>
+         <div class="matches-section glass-panel">
+            <h2>I Tuoi Like (Preferiti)</h2>
+            <div class="matches-grid" id="matches-grid">
+            </div>
+         </div>
+      </div>
+      <script src="script.js"></script>
+   </body>
+</html>

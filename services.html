@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esplora - Sparked</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        /* --- STILI SPECIFICI PER LA PAGINA ESPLORA --- */
+        
+        .services-header {
+            margin-top: 120px;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease;
+        }
+        .services-header h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+        .services-header p {
+            font-size: 1.2em;
+            color: #ccc;
+            margin-top: 10px;
+        }
+        
+        /* Filtri */
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Allinea verticalmente il bottone */
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .filter-select {
+            background: rgba(20, 30, 50, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95em;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .filter-select:hover, .filter-select:focus {
+            background: rgba(0, 210, 255, 0.1);
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+        
+        .filter-select option {
+            background: #162938;
+            color: #fff;
+        }
+
+        /* Bottone Applica Filtri */
+        .btn-filter-apply {
+            background: #4cc767; /* Verde per azione positiva */
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(76, 199, 103, 0.3);
+        }
+
+        .btn-filter-apply:hover {
+            background: #3db356;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(76, 199, 103, 0.5);
+        }
+
+        /* Griglia Layout */
+        .discovery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            animation: slideUp 1.5s ease;
+        }
+
+        /* Messaggio Nessun Risultato */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #ccc;
+            font-size: 1.2em;
+            padding: 50px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        /* Card Utente */
+        .discovery-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .discovery-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 210, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .discovery-img-box {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .discovery-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .discovery-card:hover .discovery-img-box img {
+            transform: scale(1.05);
+        }
+
+        /* --- STILE: Bottone Like (Cuore) --- */
+        .btn-like {
+            position: absolute;
+            top: 15px;
+            left: 15px; /* In alto a sinistra */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4); /* Sfondo scuro semitrasparente */
+            backdrop-filter: blur(5px);
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .btn-like:hover {
+            background: rgba(0, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        /* Quando il cuore è attivo (cliccato) */
+        .btn-like.liked {
+            background: #fff;
+            color: #ff4757; /* Rosso cuore */
+            box-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
+        }
+
+        .btn-like:active {
+            transform: scale(0.9);
+        }
+        /* ----------------------------------------- */
+
+        .status-dot {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #4cc767;
+            box-shadow: 0 0 10px #4cc767;
+            z-index: 2;
+            border: 2px solid rgba(0,0,0,0.2);
+        }
+
+        .discovery-content {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .user-header {
+            margin-bottom: 10px;
+        }
+
+        .discovery-content h3 {
+            color: #fff;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .discovery-content p.location {
+            color: #aaa;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .tag {
+            font-size: 0.75em;
+            padding: 5px 12px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: 15px;
+            color: #00d2ff;
+            font-weight: 500;
+        }
+
+        .btn-connect {
+            background: linear-gradient(45deg, #00d2ff, #00aaff);
+            color: #fff;
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1em;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn-connect:hover {
+            background: linear-gradient(45deg, #00aaff, #0088cc);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Light mode overrides */
+        body.light-mode .services-header h1 { color: #333; text-shadow: none; }
+        body.light-mode .services-header p { color: #555; }
+        body.light-mode .filter-select { background: #fff; color: #333; border-color: #ccc; }
+        body.light-mode .discovery-card { background: rgba(255,255,255,0.7); border-color: rgba(0,0,0,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        body.light-mode .discovery-card:hover { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        body.light-mode .discovery-content h3 { color: #333; }
+        body.light-mode .discovery-content p.location { color: #666; }
+        body.light-mode .tag { background: rgba(0,0,0,0.05); color: #007bff; border-color: rgba(0,0,0,0.1); }
+    </style>
+</head>
+
+<body class="scroll-page">
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo Sparked">
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html" style="color: #00d2ff; font-weight: 600;">Esplora</a> <a href="contact.html">Contact</a>
+
+            <div id="user-greeting" class="user-greeting" style="display: none;"></div>
+
+            <button class="btnLogin-popup" id="btnLogin">
+                <img src="user.png" alt="Login">
+            </button>
+
+            <div class="settings-block">
+                <button class="btnSettings" onclick="toggleSettings()">
+                    <img src="settings.png" alt="Impostazioni">
+                </button>
+
+                <div class="settings-dropdown" id="settingsDropdown">
+                    <ul>
+                        <li><a href="profile.html"><ion-icon name="person-circle-outline"></ion-icon> Account</a></li>
+                        <li class="switch-item">
+                            <span>Dark Mode</span>
+                            <label class="theme-switch">
+                                <input type="checkbox" id="theme-toggle"> 
+                                <span class="slider round">
+                                    <ion-icon name="sunny" class="icon-sun"></ion-icon>
+                                    <ion-icon name="moon" class="icon-moon"></ion-icon>
+                                </span>
+                            </label>
+                        </li>
+                        <li><a href="#"><ion-icon name="settings-outline"></ion-icon> Preferenze</a></li>
+                        <hr>
+                        <li><a href="#" class="logout-link" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon> Esci</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="services-header">
+        <h1>Trova la tua Scintilla</h1>
+        <p>Connettiti con persone che vibrano alla tua stessa frequenza.</p>
+    </div>
+
+    <div class="filters-container">
+        <select class="filter-select" id="filter-age">
+            <option value="all">Fascia d'età: Tutti</option>
+            <option value="18-25">18-25 anni</option>
+            <option value="25-35">25-35 anni</option>
+            <option value="35-50">35-50 anni</option>
+            <option value="50+">50+ anni</option>
+        </select>
+        <select class="filter-select" id="filter-distance">
+            <option value="all">Distanza: Ovunque</option>
+            <option value="10">&lt; 10 km</option>
+            <option value="50">&lt; 50 km</option>
+            <option value="100">&lt; 100 km</option>
+        </select>
+        <select class="filter-select" id="filter-interest">
+            <option value="all">Interessi: Qualsiasi</option>
+            
+            <option value="liked">❤️ I Miei Like</option>
+            
+            <option value="art">Musica & Arte</option>
+            <option value="sport">Sport & Fitness</option>
+            <option value="travel">Viaggi & Avventura</option>
+            <option value="tech">Tech & Gaming</option>
+        </select>
+        
+        <button class="btn-filter-apply" onclick="applyFilters()">
+            <ion-icon name="filter"></ion-icon> Applica
+        </button>
+    </div>
+
+    <div id="discovery-grid" class="discovery-grid">
+        </div>
+
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form onsubmit="login(event)">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" id="login-email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon" onclick="togglePassword('login-pass', 'icon-login-eye')"><ion-icon name="eye-off" id="icon-login-eye"></ion-icon></span>
+                    <input type="password" id="login-pass" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn">Accedi</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

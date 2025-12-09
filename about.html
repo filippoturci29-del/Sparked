@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Siamo - Sparked</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* CSS SPECIFICO PER LA PAGINA ABOUT */
+        
+        .about-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 120px 20px 50px; /* Spazio per l'header fisso */
+        }
+
+        .about-card {
+            background: rgba(20, 30, 50, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        /* Colonna Sinistra: FOTO */
+        .founder-img-box {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .founder-img-box img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%; /* Cerchio perfetto */
+            object-fit: cover;
+            border: 5px solid #00d2ff;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            transition: transform 0.5s;
+        }
+
+        .founder-img-box img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Colonna Destra: TESTO */
+        .founder-content {
+            flex: 1.5;
+            padding: 50px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .founder-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .founder-content h1 span {
+            color: #00d2ff;
+        }
+
+        .founder-role {
+            font-size: 1.1em;
+            color: #4cc767;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .founder-content p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 3px solid #00d2ff;
+            padding-left: 15px;
+            margin-top: 10px;
+            color: #ccc;
+        }
+
+        /* ANIMAZIONE */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE (Cellulari) */
+        @media (max-width: 768px) {
+            .about-card {
+                flex-direction: column;
+            }
+            .founder-img-box {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 30px;
+            }
+            .founder-img-box img {
+                width: 180px;
+                height: 180px;
+            }
+            .founder-content {
+                padding: 30px;
+                text-align: center;
+            }
+            .founder-content p {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo">
+        </a>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a> 
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+            
+            <a href="index.html" class="btnLogin-popup">Login</a>
+        </nav>
+    </header>
+
+    <section class="about-section">
+        <div class="about-card">
+            
+            <div class="founder-img-box">
+                <img src="IMG_9022.jpg" alt="Il Fondatore">
+            </div>
+
+            <div class="founder-content">
+                <h1>La Visione dietro <span>Sparked</span></h1>
+                <div class="founder-role">Founder & Visionary</div>
+                
+                <p>
+                    Tutto è nato da una semplice domanda: <i>"È possibile usare la tecnologia per creare connessioni che siano autentiche quanto un incontro dal vivo?"</i>
+                </p>
+                <p>
+                    Sono un imprenditore con lo sguardo sempre rivolto al futuro. Non mi sono mai accontentato delle soluzioni esistenti. Ho visto un mondo digitale pieno di rumore e ho voluto creare un segnale chiaro. 
+                    <strong>Sparked</strong> non è solo un sito, è il risultato di un'idea rivoluzionaria: mettere l'affinità reale e gli interessi condivisi al centro dell'esperienza, eliminando la superficialità.
+                </p>
+                
+                <div class="quote">
+                    "Il futuro appartiene a chi crede nella bellezza dei propri sogni e ha il coraggio di costruirli."
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

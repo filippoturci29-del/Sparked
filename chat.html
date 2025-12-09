@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Sparked</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo Sparked">
+        </a>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="services.html">Esplora</a>
+            <a href="#" onclick="history.back()"><ion-icon name="arrow-back-outline"></ion-icon> Indietro</a>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <div class="chat-box">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <img id="chat-avatar" src="" alt="User">
+                    <div>
+                        <h3 id="chat-username" style="color:white; margin:0;">Utente</h3>
+                        <small style="color:#4cc767;">Online</small>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <ion-icon name="videocam-outline" class="close-chat" style="margin-right:10px; font-size:1.2em; cursor:pointer;"></ion-icon>
+                    <ion-icon name="close-circle-outline" class="close-chat" onclick="history.back()" style="cursor:pointer;"></ion-icon>
+                </div>
+            </div>
+
+            <div id="messages-area" class="messages-area">
+                <!-- I messaggi appariranno qui -->
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="msg-input" placeholder="Scrivi un messaggio..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()">
+                    <ion-icon name="send"></ion-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
